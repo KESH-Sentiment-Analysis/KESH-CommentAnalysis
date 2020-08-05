@@ -15,4 +15,3 @@ if __name__ == "__main__":
 
     print("$ evaluating model...")
     evaluate_model()
-##Никита
