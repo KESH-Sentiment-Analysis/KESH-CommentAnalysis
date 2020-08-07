@@ -5,8 +5,8 @@ from modules.evaluator.evaluator import evaluate_model
 import numpy as np
 if __name__ == "__main__":
     print("$ loading data...")
-    data = load_data()
-    data = data[data["labels"] in ['negative', 'positive', 'neutral']]
+    load_data()
+
     print("$ preprocessing data...")
     preprocess_data()
 
