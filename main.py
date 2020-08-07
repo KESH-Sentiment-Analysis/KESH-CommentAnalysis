@@ -11,7 +11,15 @@ if __name__ == "__main__":
     preprocess_data()
 
     print("$ fitting model...")
-    fit_model()
+    def fit_model (C, kernel, gamma, X_train, Y_train, X_test, Y_test):
+        from sklearn import svm
+        from sklearn.metrics import recall_score
+
+        model1 = svm.SVC(kernel=kernel, gamma=gamma, C=C)
+
+        model1.fit(X_train, Y_train)
+        y_predict = model1.predict(X_test)
+        print(recall_score(Y_test, y_predict, average=None))
 
     print("$ evaluating model...")
     evaluate_model()
