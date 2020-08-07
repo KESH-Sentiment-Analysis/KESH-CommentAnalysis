@@ -7,10 +7,10 @@ def remove_punctuation(list_of_comments):
     # пробегаемся по всем комментариям в сыром списке
     for comment in list_of_comments:
         translator = str.maketrans('', '', string.punctuation)
-        # удаляем знаки препинания с помощью созданной функции трансляторя
-        comment2 = comment.translate(translator)
+        # удаляем знаки препинания с помощью созданной функции трансляторе
+        comment_clear = comment.translate(translator)
         # добавляем обработанный комментарий в список
-        list_of_clear_comments.append(comment2)
+        list_of_clear_comments.append(comment_clear)
     return list_of_clear_comments
 
 
