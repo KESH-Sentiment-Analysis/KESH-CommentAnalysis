@@ -1,43 +1,50 @@
 """
     Задача этого модуля -- предобработка данных
 """
-
-# импортируй здесь нужные тебе библиотеки
-# from ... import ...
-import re
 import nltk
 import string
 from nltk.corpus import stopwords
 from pymystem3 import Mystem
-from string import punctuation
 
-def remove_numbers(text):
-    result = re.sub(r'\d+', '', text)
+
+def remove_garbage(text):
+
+    # removing garbage
+    result = ''.join(symbol for symbol in text if not ('a' <= symbol <= 'z' or symbol.isdigit()))
     return result
-def remove_english(text):
-    results = list(text)
-    copyres = results.copy()
-    for result in results:
-        if result >= 'a' and result <= 'z':
-            copyres.remove(result)
-    return copyres
+
+
 def preprocess_data(text, lemmatiz_isTrue = True, tokenization_isTrue = True):
     nltk.download("stopwords")
     # Create lemmatizer and stopwords list
     mystem = Mystem()
     russian_stopwords = stopwords.words("russian")
+    
+    # lower case
     text = text.lower()
-    text = remove_numbers(text)
-    text = remove_english(text)
-    strtext = ''.join([str(elem) for elem in text])
+    
+    # removing numbers and english
+    text = remove_garbage(text)
+    
+    # lemmatization
     if lemmatiz_isTrue:
-        tokens = mystem.lemmatize(strtext)
+        tokens = mystem.lemmatize(text)
+    else:
+        tokens = text.split()
+
+    # removing punctuation and empty words   
     table = str.maketrans('', '', string.punctuation)
     stripped = [w.translate(table) for w in tokens]
-    tokens = [token for token in stripped if token not in russian_stopwords and token != " " and len(token.strip())]
+    tokens = [token for token in stripped if token not in russian_stopwords and token.strip()]
+    
+    # tokeniztion
     if tokenization_isTrue:
         return tokens
     else:
-        strtext = " ".join(tokens)
-        return strtext
-print(preprocess_data('мне    понравилась та французская булочка с чаем fjifs2223?!'))
+        text = " ".join(tokens)
+        return text
+
+
+def Test():
+    print(preprocess_data("мне понравилась английская булочка с чаем!!??,,dffisj"))
+#Test()
