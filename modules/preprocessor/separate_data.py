@@ -1,14 +1,8 @@
 import pandas as pd
+from sklearn.model_selection import train_test_split
 
+def data_separator(matrix, labels, test_percentage):
+    x_train, x_test, y_train, y_test = train_test_split(matrix, labels, test_size=test_percentage / 100,
+                                                        random_state=42)
 
-def data_separator(data_frame, separation_percentage):
-    separation_percentage /= 100
-
-    # длины списков для тренировки и теста
-    len_train = round(len(data_frame) * separation_percentage)
-    len_test = len(data_frame) - len_train
-
-    train = data_frame.iloc[:len_train]
-    test = data_frame.iloc[len_train:len_test]
-
-    return train, test
+    return x_train, x_test, y_train, y_test
