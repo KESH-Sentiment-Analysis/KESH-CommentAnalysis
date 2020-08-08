@@ -1,21 +1,8 @@
 import pandas as pd
+from sklearn.model_selection import train_test_split
 
+def data_separator(matrix, labels, test_percentage):
+    x_train, x_test, y_train, y_test = train_test_split(matrix, labels, test_size=test_percentage / 100,
+                                                        random_state=42)
 
-def data_separator(file_name, separation_percentage):
-    # file_name = "../../data/corpus_sent.csv" для тестов, надо стереть file_name из начала функции чтобы тестить
-
-    separation_percentage /= 100
-
-    df = pd.read_csv(file_name, delimiter=',')  # читаю файл с примерами
-    df = df.drop(['Unnamed: 0'], axis=1)  # убираю столбец с нумeрацией
-
-    df = df.sample(frac=1).reset_index(drop=True)  # перемешиваю датафрейм
-
-    # длины списков для тренировки и теста
-    len_train = round(len(df) * separation_percentage)
-    len_test = len(df) - len_train
-
-    train = df.iloc[:len_train]
-    test = df.iloc[len_train:len_test]
-
-    return train, test
+    return x_train, x_test, y_train, y_test
