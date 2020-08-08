@@ -4,7 +4,7 @@
 from sklearn.metrics import classification_report
 
 
-def evaluation_model(model, test_data):
+def evaluate_model(model, test_data):
     """Здесь будет ваша модель"""
     target_names = ['class 0 (positive)', 'class 1 (negative)', 'class 2 (neutral)']
     y_pred = model.predict(test_data['Text'].toarray)
