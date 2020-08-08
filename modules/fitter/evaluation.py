@@ -2,18 +2,13 @@
     Задача этого модуля -- обучение модели
 """
 from sklearn.metrics import classification_report
-import pandas as pd
 
 
-def evaluation_model(model, test):
+def evaluation_model(model, test_data):
     """Здесь будет ваша модель"""
-    for i in test:
-        y_pred.append(fit_model(i))
-    y_true = []
-    model.drop(columns=0, inplace=True)
-    y_pred = model.array
     target_names = ['class 0 (positive)', 'class 1 (negative)', 'class 2 (neutral)']
-    print(classification_report(y_true, y_pred, target_names=target_names))
+    y_pred = model.predict(test_data['Text'].toarray)
+    print(classification_report(test_data['Labels'], y_pred, target_names=target_names))
 
 
 # 0 - positive
