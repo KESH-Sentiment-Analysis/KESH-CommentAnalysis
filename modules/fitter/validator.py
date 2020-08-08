@@ -4,12 +4,12 @@ from sklearn.svm import SVC
 from sklearn.model_selection import GridSearchCV
 
 
-def validator(x_train, y_train, param_grid = {'C': [0.1, 1, 5, 10], 'gamma': [0.5, 5, 10], 'kernel': ['rbf', 'linear']}):
+def validator(x_train, y_train, param_grid={'C': [1], 'kernel': ['linear']}):
     """пример вызова функции validator():
     C, gamma, kernel = validator(x_train, y_train, your_param_grid)"""
 
-    X_train = x_train[:min(len(x_train),1000) -1]
-    Y_train = y_train[:min(len(y_train),1000) -1]
+    X_train = x_train[:min(x_train.shape[0], 1000) - 1]
+    Y_train = y_train[:min(y_train.shape[0], 1000) - 1]
 
     model = GridSearchCV(SVC(), param_grid)
 

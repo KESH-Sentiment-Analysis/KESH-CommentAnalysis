@@ -18,24 +18,25 @@ def remove_garbage(text):
 
 # removing rows with invalid labels
 def remove_bad_labels(data):
-    return data[data['labels'].isin(['negative', 'positive', 'neutral'])]
+    return data[data['Labels'].isin(['negative', 'positive', 'neautral'])]
 
 
-def preprocess_data(data, lemmatiz_isTrue = True):
+def preprocess_data(data, lemmatiz_isTrue=False):
 
-    # removing invalid rows
+    print("# removing invalid rows")
     data = remove_bad_labels(data)
 
-    # converting dataframe to list of strs
-    text_list = list(data['Text'])
+    print("# converting dataframe to list of strs")
+    text_list = data['Text'].to_list()
 
-    # Create lemmatizer and stopwords list
+    print("# Create lemmatizer and stopwords list")
     nltk.download("stopwords")
     mystem = Mystem()
     russian_stopwords = stopwords.words("russian")
 
-    # Processing list of str
+    print("# Processing list of str")
     for i, v in enumerate(text_list):
+
         # lower case
         text_list[i] = text_list[i].lower()
 
@@ -54,11 +55,13 @@ def preprocess_data(data, lemmatiz_isTrue = True):
         # converting list to str
         text_list[i] = " ".join(tokens)
 
-    # removing punctuation and empty spaces
+    print("# removing punctuation and empty spaces")
     text_list = remove_punctuation(text_list)
     text_list = remove_whitespace(text_list)
 
-    return text_list
+    # text_list = text_list[data['Text'] != ''"]
+
+    return text_list, data['Labels']
 
 
 def Test():
