@@ -14,8 +14,8 @@ def validator(data_train, param_grid = {'C': [0.1, 1, 5, 10], 'gamma': [0.5, 5, 
     model = GridSearchCV(SVC(), param_grid)
 
     # Разделение данных на фичи и цели
-    Y_train = data_train['labels']
-    X_train = data_train.drop('labels', axis=1)
+    Y_train = data_train['Labels']
+    X_train = data_train.drop('Labels', axis=1)
 
     # Выбор лучших параметров для data_train
     model.fit(X_train, Y_train)
