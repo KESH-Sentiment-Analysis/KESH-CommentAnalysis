@@ -13,6 +13,5 @@ if __name__ == "__main__":
     print("$ fitting model...")
     fit_model()
 
-
     print("$ evaluating model...")
     evaluate_model()
