@@ -13,3 +13,4 @@ def fit_model(X_train, Y_train, X_test, Y_test):
     y_predict = model.predict(X_test) #определение принадлжености к группам тестовых данных относительно введённой нами модели
     evaluate_model(y_predict, Y_test) #передача данных для сравнения в следующую функцию
 
+
