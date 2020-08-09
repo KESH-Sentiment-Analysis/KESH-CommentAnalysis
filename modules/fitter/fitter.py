@@ -17,4 +17,4 @@ def fit_model(X_train, Y_train, X_test, Y_test):
         X_test)  # определение принадлжености к группам тестовых данных относительно введённой нами модели
     evaluate_model(y_predict, Y_test)  # передача данных для сравнения в следующую функцию
 
-    pk.dump(model, open('models/saturday', 'wb'))
+    # pk.dump(model, open('models/saturday', 'wb'))

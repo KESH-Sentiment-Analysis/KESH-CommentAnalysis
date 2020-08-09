@@ -21,13 +21,14 @@ def remove_bad_labels(data):
     return data[data['Labels'].isin(['negative', 'positive', 'neautral'])]
 
 
-def preprocess_data(data, lemmatiz_isTrue=False):
+def preprocess_data(data, is_Training):
 
-    # print("# removing invalid rows")
-    # data = remove_bad_labels(data)
+    if is_Training == True:
+        print("# removing invalid rows")
+        data = remove_bad_labels(data)
 
     print("# converting dataframe to list of strs")
-    text_list = data['Comment'].to_list()
+    text_list = data['Text'].to_list()
 
     # print("# Create lemmatizer and stopwords list")
     # nltk.download("stopwords")
@@ -57,8 +58,10 @@ def preprocess_data(data, lemmatiz_isTrue=False):
     text_list = remove_whitespace(text_list)
     text_list = [text for text in text_list if text!='']
 
-    return text_list
-    #data['Labels']
+    if is_Training == True:
+        return text_list, data['Labels']
+    else:
+        return text_list
 
 
 def Test():
