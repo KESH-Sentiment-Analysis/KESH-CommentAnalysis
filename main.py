@@ -11,10 +11,10 @@ if __name__ == "__main__":
     print("$ preprocessing data...")
     str_list, new_labels = preprocess_data(data_frame)
 
-    print(str_list)
+    #print(str_list)
 
     matrix = vectorizing(str_list)
-    x_train, x_test, y_train, y_test = data_separator(matrix, new_labels.array, 25)
+    x_train, x_test, y_train, y_test = data_separator(matrix, new_labels.array, 20)
 
     print("$ fitting model...")
     fit_model(x_train, y_train, x_test, y_test)

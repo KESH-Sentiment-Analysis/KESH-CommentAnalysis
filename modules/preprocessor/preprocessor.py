@@ -50,7 +50,7 @@ def preprocess_data(data, lemmatiz_isTrue=False):
             tokens = text_list[i].split()
 
         # removing stopwords and empty words
-        tokens = [token for token in tokens if token not in russian_stopwords and token.strip()]
+        tokens = [token for token in tokens if token.strip()]
 
         # converting list to str
         text_list[i] = " ".join(tokens)
