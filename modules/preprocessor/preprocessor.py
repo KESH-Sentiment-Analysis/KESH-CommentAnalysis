@@ -23,13 +23,13 @@ def remove_bad_labels(data):
 
 def preprocess_data(data, lemmatiz_isTrue=False):
 
-    print("# removing invalid rows")
-    data = remove_bad_labels(data)
+    # print("# removing invalid rows")
+    # data = remove_bad_labels(data)
 
     print("# converting dataframe to list of strs")
-    text_list = data['Text'].to_list()
+    text_list = data['Comment'].to_list()
 
-    print("# Create lemmatizer and stopwords list")
+    # print("# Create lemmatizer and stopwords list")
     # nltk.download("stopwords")
     # mystem = Mystem()
     # russian_stopwords = stopwords.words("russian")
@@ -49,19 +49,16 @@ def preprocess_data(data, lemmatiz_isTrue=False):
         # else:
         tokens = text_list[i].split()
 
-        # removing stopwords and empty words
-        tokens = [token for token in tokens if token.strip()]
-
         # converting list to str
         text_list[i] = " ".join(tokens)
 
     print("# removing punctuation and empty spaces")
     text_list = remove_punctuation(text_list)
     text_list = remove_whitespace(text_list)
+    text_list = [text for text in text_list if text!='']
 
-    # text_list = text_list[data['Text'] != ''"]
-
-    return text_list, data['Labels']
+    return text_list
+    #data['Labels']
 
 
 def Test():
