@@ -5,7 +5,7 @@ import pickle as pk
 import pandas as pd
 
 
-def predict_data(data_path, output_path):
+def predict_data(model_path, data_path, output_path):
 
     print("$ loading data...")
     data_frame = give_data(data_path, False)
@@ -17,7 +17,7 @@ def predict_data(data_path, output_path):
     matrix = vectorizing(data_frame['Comment'], False)
 
     print("$ loading model...")
-    model = pk.load(open('models/saturday', 'rb'))
+    model = pk.load(open(model_path, 'rb'))
 
     print("$ predicting...")
     predicted_list = model.predict(matrix)

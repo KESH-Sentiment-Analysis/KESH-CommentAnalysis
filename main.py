@@ -6,11 +6,16 @@ from train import train_model
 
 if __name__ == "__main__":
 
-    # argparse is better
-    do_train = True
+    mode = 'predict'
+    # mode = 'predict'
+    # argparse is better for this
 
-    if do_train:
+    if mode == 'train':
         train_model('models/sunday')
 
+    elif mode == 'predict':
+        predict_data('models/sunday', 'data/comments_klsh.csv', 'output/klsh_predicted.csv')
+
     else:
-        predict_data('data/comments_kesh_update.csv', 'data/kesh_predicted.csv')
+        print("Error: unknown mode")
+        exit(1)

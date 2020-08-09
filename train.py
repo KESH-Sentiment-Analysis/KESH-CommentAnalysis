@@ -16,7 +16,7 @@ def train_model(model_output_path):
     data_frame = preprocess_data(data_frame, 'Text')
 
     print("$ vectorizing texts...")
-    matrix = vectorizing(data_frame['Text'].to_list(), False)
+    matrix = vectorizing(data_frame['Text'].to_list())
     x_train, x_test, y_train, y_test = data_separator(matrix, data_frame['Labels'].array, 20)
 
     print("$ fitting model...")

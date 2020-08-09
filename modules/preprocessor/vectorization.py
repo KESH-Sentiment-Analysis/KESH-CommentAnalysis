@@ -4,7 +4,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 import pickle as pk
 
 
-def vectorizing(docs, is_training):
+def vectorizing(docs, is_training=True):
 
     if is_training:
         # инициализируем CountVectorizer()

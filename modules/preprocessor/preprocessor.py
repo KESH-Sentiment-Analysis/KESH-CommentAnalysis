@@ -8,6 +8,8 @@
 from modules.preprocessor.punctuation_and_whitespace import remove_punctuation
 from modules.preprocessor.punctuation_and_whitespace import remove_whitespace
 import pandas as pd
+import numpy as np
+
 
 def remove_garbage(text):
 
@@ -16,8 +18,8 @@ def remove_garbage(text):
     return result
 
 
-# removing rows with invalid labels
 def remove_bad_labels(data):
+    # removing rows with invalid labels
     return data[data['Labels'].isin(['negative', 'positive', 'neautral'])]
 
 
@@ -26,6 +28,9 @@ def preprocess_data(data, text_col_name, has_labels=True):
     if has_labels:
         print("# removing rows with invalid labels")
         data = remove_bad_labels(data)
+
+    data = data.astype(str)
+    data = data[(data[text_col_name] != np.nan) | (data[text_col_name] != '')]
 
     print("# converting dataframe to list of strs")
     text_list = data[text_col_name].to_list()
@@ -65,9 +70,8 @@ def preprocess_data(data, text_col_name, has_labels=True):
     return data
 
 
-def Test():
+def test():
     label = ['positive', 'bebe']
-    texts =  ['банков 122 !!ds', 'dsek']
-    dataf = pd.DataFrame({'Text':texts, 'labels':label})
-    print(preprocess_data(dataf))
-#Test()
+    texts = ['банков 122 !!ds', 'dsek']
+    df = pd.DataFrame({'Text': texts, 'labels': label})
+    print(preprocess_data(df))
