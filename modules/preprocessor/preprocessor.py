@@ -21,14 +21,14 @@ def remove_bad_labels(data):
     return data[data['Labels'].isin(['negative', 'positive', 'neautral'])]
 
 
-def preprocess_data(data, is_Training):
+def preprocess_data(data, text_col_name, has_labels=True):
 
-    if is_Training == True:
-        print("# removing invalid rows")
+    if has_labels:
+        print("# removing rows with invalid labels")
         data = remove_bad_labels(data)
 
     print("# converting dataframe to list of strs")
-    text_list = data['Text'].to_list()
+    text_list = data[text_col_name].to_list()
 
     # print("# Create lemmatizer and stopwords list")
     # nltk.download("stopwords")
@@ -48,20 +48,21 @@ def preprocess_data(data, is_Training):
         # if lemmatiz_isTrue:
         #     # tokens = mystem.lemmatize(text_list[i])
         # else:
-        tokens = text_list[i].split()
-
-        # converting list to str
-        text_list[i] = " ".join(tokens)
+        # tokens = text_list[i].split()
+        #
+        # # converting list to str
+        # text_list[i] = " ".join(tokens)
 
     print("# removing punctuation and empty spaces")
     text_list = remove_punctuation(text_list)
     text_list = remove_whitespace(text_list)
-    text_list = [text for text in text_list if text!='']
 
-    if is_Training == True:
-        return text_list, data['Labels']
-    else:
-        return text_list
+    data = data.drop([text_col_name], axis=1)
+    data[text_col_name] = text_list
+
+    data = data[data[text_col_name] != '']
+
+    return data
 
 
 def Test():
