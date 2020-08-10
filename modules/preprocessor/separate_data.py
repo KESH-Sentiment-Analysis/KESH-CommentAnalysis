@@ -1,3 +1,5 @@
+# this module separates the data into train and test parts
+
 from sklearn.model_selection import train_test_split
 
 

@@ -1,5 +1,5 @@
 ### Overall Preview
-Sentiment analysis project made during a one-week educational event.
+Sentiment analysis for russian text project made during a one-week educational event.
 ### What is in our project?
 The project consists of Python programme implementing Machine Learning in order to automate the determination of emotional context of a text.
 ### What does it do?

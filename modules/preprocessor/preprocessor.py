@@ -1,6 +1,5 @@
-"""
-    Задача этого модуля -- предобработка данных
-"""
+# this module processes the text into an appropriate format
+
 # import nltk
 # import string
 # from nltk.corpus import stopwords

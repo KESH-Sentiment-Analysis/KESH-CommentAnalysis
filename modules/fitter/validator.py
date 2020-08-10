@@ -1,3 +1,5 @@
+# this module picks the best parameters for the model
+
 from sklearn.svm import SVC
 from sklearn.model_selection import GridSearchCV
 

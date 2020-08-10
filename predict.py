@@ -1,6 +1,7 @@
 from modules.loader.loader import give_data
 from modules.preprocessor.preprocessor import preprocess_data
 from modules.preprocessor.vectorization import vectorizing
+from visualize import histogram_compare
 import pickle as pk
 import pandas as pd
 
@@ -26,5 +27,7 @@ def predict_data(model_path, data_path, output_path):
 
     print("$ writing to file...")
     predicted.to_csv(output_path)
+    
+    histogram_compare(output_path)
 
     print(predicted)
