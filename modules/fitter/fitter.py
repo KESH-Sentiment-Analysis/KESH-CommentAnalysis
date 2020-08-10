@@ -1,6 +1,4 @@
-"""
-    Задача этого модуля -- обучение модели
-"""
+# This module trains the model
 
 from sklearn import svm
 from modules.fitter.validator import validator
@@ -8,18 +6,20 @@ from modules.evaluator.evaluator import evaluate_model
 
 
 def fit_model(x_train, y_train, x_test, y_test):
-    # получение необходимых параметров
+
+    # receiving the parameters
     c, kernel = validator(x_train, y_train)
 
-    # модель принимает необходимые параметры
+    # giving the parameters to the model
     model = svm.SVC(kernel=kernel, C=c)
 
-    # модель обучается на тренировочных данных
+    # training the model on the train data
     model.fit(x_train, y_train)
 
-    # определение принадлжености к группам тестовых данных относительно введённой нами модели
+    # using the model to make predictions about the test data
     y_predict = model.predict(x_test)
-    # передача данных для сравнения в следующую функцию
+
+    # transferring the prediction results to model evaluating module
     evaluate_model(y_predict, y_test)
 
     return model

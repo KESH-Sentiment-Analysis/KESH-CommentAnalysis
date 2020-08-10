@@ -13,7 +13,7 @@ import numpy as np
 
 def remove_garbage(text):
 
-    # removing garbage
+    # removing numbers and english letters
     result = ''.join(symbol for symbol in text if not ('a' <= symbol <= 'z' or symbol.isdigit()))
     return result
 
@@ -29,6 +29,7 @@ def preprocess_data(data, text_col_name, has_labels=True):
         print("# removing rows with invalid labels")
         data = remove_bad_labels(data)
 
+    # converting data to strings and removing error-causing elements
     data = data.astype(str)
     data = data[(data[text_col_name] != np.nan) | (data[text_col_name] != '')]
 
@@ -62,9 +63,11 @@ def preprocess_data(data, text_col_name, has_labels=True):
     text_list = remove_punctuation(text_list)
     text_list = remove_whitespace(text_list)
 
+    # replacing text column of the data with the processed one
     data = data.drop([text_col_name], axis=1)
     data[text_col_name] = text_list
 
+    # removing empty strings from data
     data = data[data[text_col_name] != '']
 
     return data
