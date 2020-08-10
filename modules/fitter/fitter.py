@@ -1,23 +1,25 @@
-"""
-    Задача этого модуля -- обучение модели
-"""
-
+# This module trains the model
 
 from sklearn import svm
 from modules.fitter.validator import validator
-from modules.fitter.evaluation import evaluate_model
-
-import pickle as pk
+from modules.evaluator.evaluator import evaluate_model
 
 
-def fit_model(X_train, Y_train, X_test, Y_test):
-    C, kernel = validator(X_train, Y_train) #получение необходимых параметров
-    model = svm.SVC(kernel=kernel, C=C) #модель принимает необходимые параметры
-    model.fit(X_train, Y_train) #модель обучается на тренировочных данных
-    y_predict = model.predict(X_test) #определение принадлжености к группам тестовых данных относительно введённой нами модели
-    evaluate_model(y_predict, Y_test) #передача данных для сравнения в следующую функцию
+def fit_model(x_train, y_train, x_test, y_test):
 
-    pk.dump(model, open('models/saturday', 'wb'))
+    # receiving the parameters
+    c, kernel = validator(x_train, y_train)
 
+    # giving the parameters to the model
+    model = svm.SVC(kernel=kernel, C=c)
 
+    # training the model on the train data
+    model.fit(x_train, y_train)
 
+    # using the model to make predictions about the test data
+    y_predict = model.predict(x_test)
+
+    # transferring the prediction results to model evaluating module
+    evaluate_model(y_predict, y_test)
+
+    return model

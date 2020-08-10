@@ -1,20 +1,22 @@
-from modules.loader.loader import give_data
-from modules.preprocessor.preprocessor import preprocess_data
-from modules.preprocessor.vectorization import vectorizing
-from modules.preprocessor.separate_data import data_separator
-from modules.fitter.fitter import fit_model
+from predict import predict_data
+from train import train_model
+
 
 if __name__ == "__main__":
-    print("$ loading data...")
-    data_frame = give_data('data/corpus_sent.csv')
 
-    print("$ preprocessing data...")
-    str_list, new_labels = preprocess_data(data_frame)
+    # mode in which programme runs(training a new model or using an existing one)
+    # can be set to 'predict' to predict or to 'train' to train
+    mode = 'predict'
 
-    print(str_list)
+    # checking 'train' mode
+    if mode == 'train':
+        train_model('models/sunday')
 
-    matrix = vectorizing(str_list)
-    x_train, x_test, y_train, y_test = data_separator(matrix, new_labels.array, 25)
+    # checking 'predict' mode
+    elif mode == 'predict':
+        predict_data('models/sunday', 'data/comments_klsh.csv', 'output/klsh_predicted.csv')
 
-    print("$ fitting model...")
-    fit_model(x_train, y_train, x_test, y_test)
+    # mode error
+    else:
+        print("Error: unknown mode")
+        exit(1)
