@@ -8,7 +8,6 @@ import pickle as pk
 
 
 def train_model(model_output_path):
-
     print("$ loading data...")
     data_frame = give_data('data/corpus_sent.csv')
 
