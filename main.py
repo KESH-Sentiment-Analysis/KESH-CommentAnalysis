@@ -1,6 +1,28 @@
+import pip
+
+try:
+    import sklearn
+except ImportError:
+    pip.main(['install', 'sklearn'])
+
+try:
+    import numpy
+except ImportError:
+    pip.main(['install', 'numpy'])
+
+try:
+    import pandas
+except ImportError:
+    pip.main(['install', 'pandas'])
+
+try:
+    import matplotlib
+except ImportError:
+    pip.main(['install', 'matplotlib'])  # this part of code imports needed datasets
+
 from predict import predict_data
 from train import train_model
-
+import pandas as pd
 
 if __name__ == "__main__":
 
@@ -14,9 +36,15 @@ if __name__ == "__main__":
 
     # checking 'predict' mode
     elif mode == 'predict':
-        predict_data('models/sunday', 'data/comments_klsh.csv', 'output/klsh_predicted.csv')
 
-    # mode error
-    else:
-        print("Error: unknown mode")
-        exit(1)
+        n = int(input('Введите количество предложений '))
+        data = {'Comment': [input('Введите {0} предложение: '.format(i + 1)) for i in range(n)]}
+
+        df = pd.DataFrame(data, columns=['', 'Comment'])
+
+        predict_data('models/sunday', df, 'output/klsh_predicted.csv')
+
+# mode error
+else:
+    print("Error: unknown mode")
+    exit(1)

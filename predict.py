@@ -7,12 +7,7 @@ import pandas as pd
 
 
 def predict_data(model_path, data_path, output_path):
-
-    print("$ loading data...")
-    data_frame = give_data(data_path, False)
-
-    print("$ preprocessing data...")
-    data_frame = preprocess_data(data_frame, 'Comment', False)
+    data_frame = data_path
 
     print("$ vectorizing data...")
     matrix = vectorizing(data_frame['Comment'], False)
@@ -27,7 +22,7 @@ def predict_data(model_path, data_path, output_path):
 
     print("$ writing to file...")
     predicted.to_csv(output_path)
-    
+
     histogram_compare(output_path)
 
     print(predicted)
